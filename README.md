@@ -6,6 +6,11 @@ https://www.iitm.ac.in/donlab/tts/voices.php
 ## System requirements:
 Ubuntu 16.04
 
+## Will it work on Windows?
+
+No. 
+
+
 ## How to execute:
 
 
