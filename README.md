@@ -46,3 +46,10 @@ This will convert the text and store as wav in
 ssn_hts_demo/wav/1.wav
 
 you can play it with any audio player.
+
+
+The full details of what is on the compile process is explained here.
+https://goinggnu.wordpress.com/2017/09/20/how-to-compile-tamil-tts-engine-from-source/
+
+To hear a demo on how the tamil TTS system sounds, click here
+https://soundcloud.com/shrinivasan/tamil-tts-demo
