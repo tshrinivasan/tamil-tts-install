@@ -1,12 +1,14 @@
-# tamil-tts-install
+#Tamil-TTS-install-script
 
 This is a script to install the Tamil text to Speech System provided by IIT Madras and SSN Engineering College at
 https://www.iitm.ac.in/donlab/tts/voices.php
 
-System requirements:
+##System requirements:
 Ubuntu 16.04
 
-How to execute:
+##How to execute:
+
+
 
 git clone https://github.com/tshrinivasan/tamil-tts-install.git
 
@@ -17,12 +19,14 @@ Edit the file, install-tamil-tts.sh
 Fill the following details.
 
 DOWNLOAD_PATH=/home/ubuntu/tts/packages  #to download the required packages
+
 COMPILE_PATH=/home/ubuntu/tts/compiled   # to place the compiled files and folders
 
 
 Register here http://htk.eng.cam.ac.uk/download.shtml and get a username and password
 
 HTKUSER=htkuserchennai
+
 HTKPASSWORD=sgqY=t=M
 
 
@@ -32,7 +36,7 @@ bash install-tamil-tts.sh
 
 
 
-How to convert a text to audio?
+##How to convert a text to audio?
 
 
 export FESTDIR=/usr
