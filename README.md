@@ -1,6 +1,6 @@
 # Tamil-TTS-install-script
 
-This is a script to install the Tamil text to Speech System provided by IIT Madras and SSN Engineering College at
+This is a script to install the Tamil text to Speech System provided by IIT Madras and SSN College of Engineering at
 https://www.iitm.ac.in/donlab/tts/voices.php
 
 ## System requirements:
