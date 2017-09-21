@@ -9,7 +9,7 @@ HTKUSER=htkuserchennai
 HTKPASSWORD=sgqY=t=M
 
 
-sudo apt-get install  wget festival libx11-dev   build-essential g++-4.7 csh gawk bc sox tcsh default-jre -y
+sudo apt-get install  wget festival libx11-dev   build-essential g++-4.7 csh gawk bc sox tcsh default-jre  mp3wrap -y
 
 
 mkdir -p $DOWNLOAD_PATH
@@ -89,3 +89,6 @@ gcc scripts/tamil_trans.c -o scripts/tamil_trans
 echo "FESTDIR=/usr" >> $HOME/.profile
 source $HOME/.profile
 
+
+#comment the play audio file line on the complete script
+sed -e '/play/ s/^#*/#/'  -i  $DOWNLOAD_PATH/ssn_hts_demo/scripts/complete 
