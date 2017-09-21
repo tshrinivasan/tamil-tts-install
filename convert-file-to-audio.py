@@ -37,6 +37,5 @@ for line in lines:
 
 
 os.chdir(out_dir)
-os.system("mp3wrap " + filename + "  *.mp3")
+os.system("cat *.mp3 > " + filename + ".mp3")
 os.system("rm 0*.mp3")
-os.system("mv " + filename + "_MP3WRAP.mp3 " + filename +".mp3")

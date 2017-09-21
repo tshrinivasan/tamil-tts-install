@@ -16,10 +16,10 @@ mkdir -p $DOWNLOAD_PATH
 mkdir -p $COMPILE_PATH
 
 cd $DOWNLOAD_PATH
-wget https://www.iitm.ac.in/donlab/tts/downloads/voices/hts23/ssn_hts_demo_tamil_male.tgz
+wget https://www.iitm.ac.in/donlab/tts/downloads/voices/hts23/ssn_hts_demo_Tamil_male.tgz
 
-gunzip ssn_hts_demo_tamil_male.tgz
-tar xvf ssn_hts_demo_tamil_male.tar
+gunzip ssn_hts_demo_Tamil_male.tgz
+tar xvf ssn_hts_demo_Tamil_male.tar
 
 
 
