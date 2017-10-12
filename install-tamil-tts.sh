@@ -9,7 +9,7 @@ HTKUSER=htkuserchennai
 HTKPASSWORD=sgqY=t=M
 
 
-sudo apt-get install  wget festival libx11-dev   build-essential g++-4.7 csh gawk bc sox tcsh default-jre  mp3wrap -y
+sudo apt-get install  wget festival libx11-dev perl  build-essential g++-4.7 csh gawk bc sox tcsh default-jre lame   -y
 
 
 mkdir -p $DOWNLOAD_PATH
@@ -92,3 +92,6 @@ source $HOME/.profile
 
 #comment the play audio file line on the complete script
 sed -e '/play/ s/^#*/#/'  -i  $DOWNLOAD_PATH/ssn_hts_demo/scripts/complete 
+
+#replace $FESTDIR to /usr as festival's path in ubuntu is /usr/bin/festival
+perl -i -pe 's/\$FESTDIR/\/usr/g' $DOWNLOAD_PATH/ssn_hts_demo/scripts/complete
