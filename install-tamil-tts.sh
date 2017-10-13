@@ -86,8 +86,8 @@ sudo cp $DOWNLOAD_PATH/ssn_hts_demo/Slurp.pm /usr/share/perl5/File/
 
 gcc scripts/tamil_trans.c -o scripts/tamil_trans
 
-echo "FESTDIR=/usr" >> $HOME/.profile
-source $HOME/.profile
+#echo "FESTDIR=/usr" >> $HOME/.profile
+#source $HOME/.profile
 
 
 #comment the play audio file line on the complete script
