@@ -1,6 +1,6 @@
 #!/bin/bash
-DOWNLOAD_PATH=/home/ubuntu/tts/packages
-COMPILE_PATH=/home/ubuntu/tts/compiled
+DOWNLOAD_PATH=/home/nithya/dev/tts/packages
+COMPILE_PATH=/home/nithya/dev/tts/compiled
 
 
 #Register here http://htk.eng.cam.ac.uk/download.shtml and get a username and password
@@ -16,7 +16,7 @@ mkdir -p $DOWNLOAD_PATH
 mkdir -p $COMPILE_PATH
 
 cd $DOWNLOAD_PATH
-wget https://www.iitm.ac.in/donlab/tts/downloads/voices/hts23/ssn_hts_demo_Tamil_male.tgz
+wget -nc https://www.iitm.ac.in/donlab/tts/downloads/voices/hts23/ssn_hts_demo_Tamil_male.tgz
 
 gunzip ssn_hts_demo_Tamil_male.tgz
 tar xvf ssn_hts_demo_Tamil_male.tar
@@ -24,7 +24,7 @@ tar xvf ssn_hts_demo_Tamil_male.tar
 
 
 cd $DOWNLOAD_PATH
-wget https://nchc.dl.sourceforge.net/project/sp-tk/SPTK/SPTK-3.10/SPTK-3.10.tar.gz
+wget -nc https://nchc.dl.sourceforge.net/project/sp-tk/SPTK/SPTK-3.10/SPTK-3.10.tar.gz
 tar xvzf SPTK-3.10.tar.gz
 cd SPTK-3.10
 ./configure --prefix=$COMPILE_PATH/sptk
@@ -35,12 +35,12 @@ make install
 cd $DOWNLOAD_PATH
 mkdir hts-htk
 cd hts-htk
-wget http://hts.sp.nitech.ac.jp/archives/2.3/HTS-2.3_for_HTK-3.4.1.tar.bz2
+wget -nc http://hts.sp.nitech.ac.jp/archives/2.3/HTS-2.3_for_HTK-3.4.1.tar.bz2
 tar xvjf HTS-2.3_for_HTK-3.4.1.tar.bz2
 
 cd $DOWNLOAD_PATH
-wget http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz --user=$HTKUSER --password=$HTKPASSWORD
-wget http://htk.eng.cam.ac.uk/ftp/software/hdecode/HDecode-3.4.1.tar.gz --user=$HTKUSER --password=$HTKPASSWORD
+wget -nc  http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz --user=$HTKUSER --password=$HTKPASSWORD
+wget -nc http://htk.eng.cam.ac.uk/ftp/software/hdecode/HDecode-3.4.1.tar.gz --user=$HTKUSER --password=$HTKPASSWORD
 
 tar -zxvf HTK-3.4.1.tar.gz
 tar -zxvf HDecode-3.4.1.tar.gz
@@ -56,7 +56,7 @@ make install
 
 cd $DOWNLOAD_PATH
 
-wget https://nchc.dl.sourceforge.net/project/hts-engine/hts_engine%20API/hts_engine_API-1.10/hts_engine_API-1.10.tar.gz
+wget -nc https://nchc.dl.sourceforge.net/project/hts-engine/hts_engine%20API/hts_engine_API-1.10/hts_engine_API-1.10.tar.gz
 
 tar xvzf hts_engine_API-1.10.tar.gz
 cd hts_engine_API-1.10
