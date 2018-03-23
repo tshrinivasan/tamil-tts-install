@@ -4,7 +4,7 @@ import time
 import datetime
 
 ssn_demo_path = "/home/shrini/Downloads/ssn_hts_demo"
-mp3_out_path = "/home/shrini/test"
+#mp3_out_path = "/home/shrini/test"
 
 
 ts = time.time()
@@ -14,7 +14,7 @@ input_file = sys.argv[1]
 
 filename = input_file.split(".txt")[0]
 
-out_dir = mp3_out_path +"/" + filename + "-" + timestamp
+out_dir =  filename + "-" + timestamp
 
 os.system("mkdir " + out_dir)
 
