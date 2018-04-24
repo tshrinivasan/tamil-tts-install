@@ -119,15 +119,17 @@ tamil_tts_run() {
 
     SOURCE=$(readlink -f "${SOURCE}")
     OUTPUT=$(readlink -f "${OUTPUT}")
+    MP3OUTPUT="${OUTPUT%.*}.mp3"
     CURRENTDIR=$(pwd)
+
+    rm -f "${OUTPUT}" "${MP3OUTPUT}"
     cp -fra "${RUNDIR}" "${RUNDIR}_${RUNID}"
     RUNDIR="${RUNDIR}_${RUNID}"
     cd "${RUNDIR}"
     ./configure --with-fest-search-path=/usr/share/doc/festival/examples --with-sptk-search-path="${COMPILE_PATH}"/sptk/bin/ --with-hts-search-path="${COMPILE_PATH}"/htk/bin/ --with-hts-engine-search-path="${COMPILE_PATH}"/hts_engine_api/bin/
     ./scripts/complete "${SOURCE}" linux
-    RETURNCODE="${?}"
     cd "${CURRENTDIR}"
-    if [[ ! "${RETURNCODE}" -eq 0 ]]; then
+    if [[ $(stat -c '%s' "${RUNDIR}"/wav/1.wav) -eq 0 ]]; then
 	echo "output file genertion failed" 1>&2
 	rm -fr "${RUNDIR}"
 	exit 1
@@ -137,9 +139,8 @@ tamil_tts_run() {
     rm -fr "${RUNDIR}"
 
     if [[ "${MP3}" -eq 1 ]]; then
-	MP3OUTPUT="${OUTPUT%.*}.mp3"
 	lame "${OUTPUT}" "${MP3OUTPUT}"
-	rm "${OUTPUT}"
+	rm -f "${OUTPUT}"
     fi
 }
 
