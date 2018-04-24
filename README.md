@@ -6,8 +6,8 @@ This is a script to install the Tamil text to Speech System provided by IIT Madr
 https://www.iitm.ac.in/donlab/tts/voices.php
 
 ## System requirements:
-Ubuntu 16.04
-Ubuntu 18.04
+1. Ubuntu 16.04
+2. Ubuntu 18.04
 
 ## Will it work on Windows?
 No. 
