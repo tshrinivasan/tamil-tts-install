@@ -6,7 +6,8 @@ DOWNLOAD_PATH="${BUILD}"/packages
 COMPILE_PATH="${BUILD}"/compiled
 RUNDIR="${DOWNLOAD_PATH}"/ssn_hts_demo
 
-tamil_tts_install() {
+tamil_tts_setup() {
+    CURRENTDIR=$(pwd)
     #Register here http://htk.eng.cam.ac.uk/download.shtml and get a username and password
     HTKUSER=htkuserchennai
     HTKPASSWORD=sgqY=t=M
@@ -82,7 +83,6 @@ tamil_tts_install() {
 
     cd "${DOWNLOAD_PATH}"
     cd ssn_hts_demo
-    ./configure --with-fest-search-path=/usr/share/doc/festival/examples --with-sptk-search-path="${COMPILE_PATH}"/sptk/bin/ --with-hts-search-path="${COMPILE_PATH}"/htk/bin/ --with-hts-engine-search-path="${COMPILE_PATH}"/hts_engine_api/bin/
     if [[ ! -f /usr/share/festival/radio_phones.scm-old ]]; then
 	sudo mv /usr/share/festival/radio_phones.scm /usr/share/festival/radio_phones.scm-old
 	sudo cp "${DOWNLOAD_PATH}"/ssn_hts_demo/radio_phones.scm /usr/share/festival/
@@ -103,19 +103,27 @@ tamil_tts_install() {
     #make temp2 to point to input file
     sed -i -e 's:^echo.*temp2$:cp $1 temp2:g' "${DOWNLOAD_PATH}"/ssn_hts_demo/scripts/complete
 
+    cd "${CURRENTDIR}"
     echo "installation completed"
 }
 
 tamil_tts_run() {
-    if [[ -z "${SOURCE}" ]] || [[ -z "${OUTPUT}" ]]; then
+    if [[ -z "${SOURCE}" ]]; then
 	echo "${USAGE}"
 	exit 1
     fi
 
+    if [[ -z "${OUTPUT}" ]]; then
+	OUTPUT="${SOURCE%.*}.wav"
+    fi
+
+    SOURCE=$(readlink -f "${SOURCE}")
+    OUTPUT=$(readlink -f "${OUTPUT}")
     CURRENTDIR=$(pwd)
     cp -fra "${RUNDIR}" "${RUNDIR}_${RUNID}"
     RUNDIR="${RUNDIR}_${RUNID}"
     cd "${RUNDIR}"
+    ./configure --with-fest-search-path=/usr/share/doc/festival/examples --with-sptk-search-path="${COMPILE_PATH}"/sptk/bin/ --with-hts-search-path="${COMPILE_PATH}"/htk/bin/ --with-hts-engine-search-path="${COMPILE_PATH}"/hts_engine_api/bin/
     ./scripts/complete "${SOURCE}" linux
     RETURNCODE="${?}"
     cd "${CURRENTDIR}"
@@ -127,31 +135,46 @@ tamil_tts_run() {
 
     cp "${RUNDIR}"/wav/1.wav "${OUTPUT}"
     rm -fr "${RUNDIR}"
+
+    if [[ "${MP3}" -eq 1 ]]; then
+	MP3OUTPUT="${OUTPUT%.*}.mp3"
+	lame "${OUTPUT}" "${MP3OUTPUT}"
+	rm "${OUTPUT}"
+    fi
+}
+
+tamil_tts_clean() {
+    rm -fr "${BUILD}"
 }
 
 USAGE="[usage]
-	${0} --install
-	${0} --run [--runid id] --source sourcefile --output outputfile
+	${0} --clean
+	${0} --setup
+	${0} --run [--runid id] [--gen-mp3] [--output outputfile ] --source sourcefile
 	${0} -h|--help
 "
 
-ARGS=$(getopt -o h -l install,run,runid:,source:,output:,help -n "${0}" -- "${@}")
+ARGS=$(getopt -o h -l clean,setup,run,gen-mp3,runid:,source:,output:,help -n "${0}" -- "${@}")
 if [[ ! "${?}" -eq 0 ]]; then
     echo "failed parse options" 1>&2
     exit 1
 fi
 
 eval set -- "${ARGS}"
-INSTALL=0
+CLEAN=0
+SETUP=0
 RUN=0
+MP3=0
 RUNID="${$}"
 SOURCE=""
 OUTPUT=""
 
 while true; do
     case "${1}" in
-	--install) INSTALL=1; shift;;
+	--clean) CLEAN=1; shift;;
+	--setup) SETUP=1; shift;;
 	--run) RUN=1; shift;;
+	--gen-mp3) MP3=1; shift;;
 	--runid) RUNID="${2}"; shift 2;;
 	--source) SOURCE="${2}"; shift 2;;
 	--output) OUTPUT="${2}"; shift 2;;
@@ -160,8 +183,12 @@ while true; do
     esac
 done
 
-if [[ "${INSTALL}" -eq 1 ]]; then
-    tamil_tts_install
+if [[ "${CLEAN}" -eq 1 ]]; then
+    tamil_tts_clean
+fi
+
+if [[ "${SETUP}" -eq 1 ]]; then
+    tamil_tts_setup
 fi
 
 if [[ "${RUN}" -eq 1 ]]; then
